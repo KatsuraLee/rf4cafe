@@ -29,8 +29,8 @@
 
       <!-- 右侧背景图 -->
       <main class="content">
-        <!-- Loading 动画 -->
-        <div v-if="loading" class="loading-spinner">🔄 Loading...</div>
+        <!-- 圆形 Loading 动画 -->
+        <div v-if="loading" class="loading-spinner"></div>
 
         <!-- 图片容器 -->
         <img
@@ -46,9 +46,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-// 自动生成图片映射表（推荐方式）
+// 自动生成图片映射表
 const imageMap = Object.fromEntries(
   [
     '1.png',
@@ -94,7 +94,7 @@ const menus = [
 ]
 
 const currentImage = ref<string>(menus[0].image)
-const loading = ref<boolean>(false)
+const loading = ref<boolean>(true) // 默认为 true，首次加载显示 loading
 
 // 点击左侧菜单时触发
 function handleMenuClick(imageName: string) {
@@ -217,19 +217,23 @@ function onImageLoad() {
   object-fit: contain;
 }
 
-/* Loading 样式 */
+/* 圆形 Loading 样式 */
 .loading-spinner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
-  color: #fff;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-left-color: #ffffff;
+  border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 </style>
