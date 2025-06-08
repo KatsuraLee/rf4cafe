@@ -71,7 +71,8 @@ const imageMap = Object.fromEntries(
 )
 
 function getImageUrl(name: string): string {
-  return imageMap[name] || ''
+  // 添加时间戳避免缓存
+  return imageMap[name] ? `${imageMap[name]}?t=${Date.now()}` : ''
 }
 
 const menus = [
@@ -106,6 +107,26 @@ function handleMenuClick(imageName: string) {
 function onImageLoad() {
   loading.value = false
 }
+
+// 👇 每分钟刷新一次图片
+function startAutoRefresh() {
+  setInterval(() => {
+    const prevImage = currentImage.value
+    loading.value = true
+
+    // 强制 Vue 更新 img src，即使图片名不变也刷新
+    currentImage.value = '' as any // 清空一下保证下次赋值会触发更新
+    setTimeout(() => {
+      currentImage.value = prevImage
+    }, 0)
+  }, 60 * 1000) // 每 60 秒刷新一次
+}
+
+// 页面加载完成后启动定时器
+onMounted(() => {
+  loading.value = false
+  startAutoRefresh()
+})
 </script>
 
 <style scoped>
