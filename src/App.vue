@@ -60,8 +60,7 @@ const imageMap = Object.fromEntries(
     '13.png',
     '14.png',
     '15.png',
-    '16.png',
-    '17.png'
+    '16.png'
   ].map(name => [name, new URL(`./assets/cafe/${name}`, import.meta.url).href])
 )
 
@@ -76,7 +75,7 @@ const menus = [
   { name: '旧奥斯特罗格湖', image: '3.png' },
   { name: '白河', image: '4.png' },
   { name: '廓里湖', image: '5.png' },
-  { name: '梅德韦杰湖', image: '6.png' },
+  //{ name: '梅德韦杰湖', image: '6.png' },
   { name: '沃尔霍夫河', image: '7.png' },
   { name: '北顿涅茨河', image: '8.png' },
   { name: '苏拉河', image: '9.png' },
