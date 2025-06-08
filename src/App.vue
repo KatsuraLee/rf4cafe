@@ -1,218 +1,131 @@
 <template>
-  <div class="relative h-screen overflow-hidden flex flex-col">
-    <!-- 顶部导航 -->
-    <header class="h-12 bg-gray-900 text-white flex items-center px-6 flex-shrink-0">
-      <h1 class="font-bold text-lg">咖啡厅</h1>
-      <nav class="ml-auto">
-        <ul class="flex space-x-4">
-          <li><a href="#" class="hover:text-blue-300">订单</a></li>
-        </ul>
-      </nav>
-    </header>
+  <div class="app">
+    <!-- 顶部标题 -->
+    <header class="app-header">咖啡厅</header>
 
     <!-- 主体内容 -->
-    <div class="relative flex flex-1">
+    <div class="app-main">
       <!-- 左侧菜单 -->
-      <nav class="w-60 p-4 flex flex-col space-y-3 select-none bg-gray-800 text-white z-10">
-        <h2 class="text-lg font-bold mb-4">水塘</h2>
-        <ul>
-          <li v-for="(waterBody, index) in waterBodies" :key="index" @click="selectWaterBody(index)">
-            <span :class="{ 'text-blue-400': activeWaterBodyIndex === index }">{{ waterBody.name }}</span>
+      <aside class="sidebar">
+        <div class="sidebar-title">水塘</div>
+        <ul class="sidebar-menu">
+          <li
+            v-for="item in menus"
+            :key="item.name"
+            class="sidebar-item"
+            :class="{ active: item.image === currentImage }"
+            @click="currentImage = item.image"
+          >
+            ▶ {{ item.name }}
           </li>
         </ul>
-      </nav>
+      </aside>
 
-      <!-- 右侧内容 -->
-      <main class="flex-1 p-4 relative z-10">
-        <!-- 鱼类卡片 -->
+      <!-- 右侧内容区域 -->
+      <main class="content">
         <img
-          :src="selectedWaterBody.fishImage"
-          alt="鱼类卡片"
-          class="w-full h-full object-contain mt-10"
+          :src="`/src/assets/${currentImage}`"
+          alt="背景图"
+          class="bg-image"
         />
       </main>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from 'vue'
+<script setup>
+import { ref } from 'vue'
 
-const waterBodies = [
-  {
-    name: '克马玲诺也湖',
-    fishImage: '/path/to/fishCards_kema.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '惟有诺克河',
-    fishImage: '/path/to/fishCards_weinuo.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '旧奥斯特罗格湖',
-    fishImage: '/path/to/fishCards_jiuostero.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '白河',
-    fishImage: '/path/to/fishCards_baihe.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '廓里湖',
-    fishImage: '/path/to/fishCards_kuoli.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '沃尔霍夫河',
-    fishImage: '/path/to/fishCards_wolhe.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '北顿涅茨河',
-    fishImage: '/path/to/fishCards_beidunnei.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '苏拉河',
-    fishImage: '/path/to/fishCards_sula.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '拉多加湖',
-    fishImage: '/path/to/fishCards_ladongjia.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '琥珀湖',
-    fishImage: '/path/to/fishCards_hupo.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '拉多加湖群岛',
-    fishImage: '/path/to/fishCards_ladongjiadao.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '阿赫图巴河',
-    fishImage: '/path/to/fishCards_achtuba.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '钢湖',
-    fishImage: '/path/to/fishCards_ganghu.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '下通古斯卡河',
-    fishImage: '/path/to/fishCards_xiatongguska.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '亚马河',
-    fishImage: '/path/to/fishCards_yama.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  },
-  {
-    name: '鄂威海',
-    fishImage: '/path/to/fishCards_ewei.png', // 合并后的鱼类卡片图片路径
-    fishes: [
-      // 相应鱼类信息...
-    ]
-  }
+const menus = [
+  { name: '克马尔蒂诺比湖', image: 'bg1.jpg' },
+  { name: '旧马尔蒂诺比湖', image: 'bg2.jpg' },
+  { name: '白河', image: 'bg3.jpg' },
+  { name: '腾空湖', image: 'bg4.jpg' },
+  { name: '沃尔霍夫河', image: 'bg5.jpg' },
+  { name: '北极圈叉河', image: 'bg6.jpg' },
+  { name: '芬芬湖', image: 'bg7.jpg' },
+  { name: '拉古拉湖', image: 'bg8.jpg' },
+  { name: '拉克加娜群岛', image: 'bg9.jpg' },
+  { name: '阿穆尔河口', image: 'bg10.jpg' },
+  { name: '钓鱼港', image: 'bg11.jpg' },
+  { name: '下游叶卡卡河', image: 'bg12.jpg' },
+  { name: '亚马河', image: 'bg13.jpg' },
+  { name: '娜威湾', image: 'bg14.jpg' }
 ]
 
-const activeWaterBodyIndex = ref(0)
-
-const selectedWaterBody = computed(() => waterBodies[activeWaterBodyIndex.value])
-
-function selectWaterBody(index: number) {
-  activeWaterBodyIndex.value = index
-}
+const currentImage = ref(menus[0].image)
 </script>
 
 <style scoped>
-/* 顶部导航 */
-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #000;
 }
 
-/* 左侧菜单 */
-nav ul li {
+.app-header {
+  background: #ccc;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 0;
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 20px 10px;
+  font-family: sans-serif;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  padding: 6px 0;
   cursor: pointer;
-  padding: 0.5rem 0;
+  font-size: 14px;
+  transition: color 0.2s;
 }
 
-nav ul li:hover {
-  text-decoration: underline;
+.sidebar-item:hover {
+  color: #f0c040;
 }
 
-/* 右侧内容 */
-main {
-  background-color: rgba(0, 0, 0, 0.5);
+.sidebar-item.active {
+  color: #f0c040;
 }
 
-main img {
-  display: block;
-  margin: auto;
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
 }
 
-/* 动画 */
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.3s ease;
-  position: absolute;
-  width: 100%;
-}
-
-.slide-fade-enter-from {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
-.slide-fade-enter-to {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.slide-fade-leave-from {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.slide-fade-leave-to {
-  transform: translateX(-100%);
-  opacity: 0;
+.bg-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 </style>
