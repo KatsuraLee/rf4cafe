@@ -18,7 +18,7 @@
               :key="item.name"
               class="sidebar-item"
               :class="{ active: item.image === currentImage }"
-              @click="currentImage = item.image"
+              @click="handleMenuClick(item.image)"
             >
               <span class="arrow" :class="{ visible: item.image === currentImage }">▶</span>
               <span class="menu-text">{{ item.name }}</span>
@@ -29,10 +29,16 @@
 
       <!-- 右侧背景图 -->
       <main class="content">
+        <!-- Loading 动画 -->
+        <div v-if="loading" class="loading-spinner">🔄 Loading...</div>
+
+        <!-- 图片容器 -->
         <img
+          v-show="!loading"
           :src="getImageUrl(currentImage)"
           alt="背景图"
           class="bg-image"
+          @load="onImageLoad"
         />
       </main>
     </div>
@@ -74,7 +80,6 @@ const menus = [
   { name: '旧奥斯特罗格湖', image: '3.png' },
   { name: '白河', image: '4.png' },
   { name: '廓里湖', image: '5.png' },
-  //{ name: '梅德韦杰湖', image: '6.png' },
   { name: '沃尔霍夫河', image: '6.png' },
   { name: '北顿涅茨河', image: '7.png' },
   { name: '苏拉河', image: '8.png' },
@@ -89,6 +94,18 @@ const menus = [
 ]
 
 const currentImage = ref<string>(menus[0].image)
+const loading = ref<boolean>(false)
+
+// 点击左侧菜单时触发
+function handleMenuClick(imageName: string) {
+  currentImage.value = imageName
+  loading.value = true
+}
+
+// 图片加载完成后触发
+function onImageLoad() {
+  loading.value = false
+}
 </script>
 
 <style scoped>
@@ -191,11 +208,28 @@ const currentImage = ref<string>(menus[0].image)
   justify-content: center;
   align-items: center;
   background-color: black;
+  position: relative;
 }
 
 .bg-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* Loading 样式 */
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 </style>
