@@ -60,8 +60,7 @@ const imageMap = Object.fromEntries(
     '13.png',
     '14.png',
     '15.png',
-    '16.png',
-    '17.png'
+    '16.png'
   ].map(name => [name, new URL(`./assets/cafe/${name}`, import.meta.url).href])
 )
 
