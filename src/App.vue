@@ -42,28 +42,52 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+// 自动生成图片映射表（推荐方式）
+const imageMap = Object.fromEntries(
+  [
+    '1.png',
+    '2.png',
+    '3.png',
+    '4.png',
+    '5.png',
+    '6.png',
+    '7.png',
+    '8.png',
+    '9.png',
+    '10.png',
+    '11.png',
+    '12.png',
+    '13.png',
+    '14.png',
+    '15.png',
+    '16.png',
+    '17.png'
+  ].map(name => [name, new URL(`./assets/cafe/${name}`, import.meta.url).href])
+)
+
 function getImageUrl(name: string): string {
-  return new URL(`./public/cafe/${name}`, import.meta.url).href
+console.log('imageMap',name)
+  return imageMap[name] || ''
 }
 
 const menus = [
-  { name: '克马羚诺也湖', image: 'bg1.png' },
-  { name: '惟有诺克河', image: 'bg2.png' },
-  { name: '旧奥斯特罗格湖', image: 'bg3.png' },
-  { name: '白河', image: 'bg4.png' },
-  { name: '廓里湖', image: 'bg5.png' },
-  { name: '梅德韦杰湖', image: 'bg6.png' },
-  { name: '沃尔霍夫河', image: 'bg7.png' },
-  { name: '北顿涅茨河', image: 'bg8.png' },
-  { name: '苏拉河', image: 'bg9.png' },
-  { name: '拉多加湖', image: 'bg10.png' },
-  { name: '琥珀湖', image: 'bg11.png' },
-  { name: '拉多加湖群岛', image: 'bg12.png' },
-  { name: '阿赫图巴河', image: 'bg13.png' },
-  { name: '铜湖', image: 'bg14.png' },
-  { name: '下通古斯卡河', image: 'bg15.png' },
-  { name: '亚马河', image: 'bg16.png' },
-  { name: '挪威海', image: 'bg17.png' },
+  { name: '克马羚诺也湖', image: '1.png' },
+  { name: '惟有诺克河', image: '2.png' },
+  { name: '旧奥斯特罗格湖', image: '3.png' },
+  { name: '白河', image: '4.png' },
+  { name: '廓里湖', image: '5.png' },
+  { name: '梅德韦杰湖', image: '6.png' },
+  { name: '沃尔霍夫河', image: '7.png' },
+  { name: '北顿涅茨河', image: '8.png' },
+  { name: '苏拉河', image: '9.png' },
+  { name: '拉多加湖', image: '10.png' },
+  { name: '琥珀湖', image: '11.png' },
+  { name: '拉多加湖群岛', image: '12.png' },
+  { name: '阿赫图巴河', image: '13.png' },
+  { name: '铜湖', image: '14.png' },
+  { name: '下通古斯卡河', image: '15.png' },
+  { name: '亚马河', image: '16.png' },
+  { name: '挪威海', image: '17.png' }
 ]
 
 const currentImage = ref<string>(menus[0].image)
