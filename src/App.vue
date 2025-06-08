@@ -65,7 +65,6 @@ const imageMap = Object.fromEntries(
 )
 
 function getImageUrl(name: string): string {
-console.log('imageMap',name)
   return imageMap[name] || ''
 }
 
