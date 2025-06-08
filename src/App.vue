@@ -76,17 +76,17 @@ const menus = [
   { name: '白河', image: '4.png' },
   { name: '廓里湖', image: '5.png' },
   //{ name: '梅德韦杰湖', image: '6.png' },
-  { name: '沃尔霍夫河', image: '7.png' },
-  { name: '北顿涅茨河', image: '8.png' },
-  { name: '苏拉河', image: '9.png' },
-  { name: '拉多加湖', image: '10.png' },
-  { name: '琥珀湖', image: '11.png' },
-  { name: '拉多加湖群岛', image: '12.png' },
-  { name: '阿赫图巴河', image: '13.png' },
-  { name: '铜湖', image: '14.png' },
-  { name: '下通古斯卡河', image: '15.png' },
-  { name: '亚马河', image: '16.png' },
-  { name: '挪威海', image: '17.png' }
+  { name: '沃尔霍夫河', image: '6.png' },
+  { name: '北顿涅茨河', image: '7.png' },
+  { name: '苏拉河', image: '8.png' },
+  { name: '拉多加湖', image: '9.png' },
+  { name: '琥珀湖', image: '10.png' },
+  { name: '拉多加湖群岛', image: '11.png' },
+  { name: '阿赫图巴河', image: '12.png' },
+  { name: '铜湖', image: '13.png' },
+  { name: '下通古斯卡河', image: '14.png' },
+  { name: '亚马河', image: '15.png' },
+  { name: '挪威海', image: '16.png' }
 ]
 
 const currentImage = ref<string>(menus[0].image)
