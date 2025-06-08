@@ -24,12 +24,6 @@
 
       <!-- 右侧内容 -->
       <main class="flex-1 p-4 relative z-10">
-        <!-- 背景图 -->
-        <div
-          class="absolute top-0 left-0 w-full h-full bg-cover bg-center filter blur-2xl scale-110 z-0"
-          :style="{ backgroundImage: `url(${selectedWaterBody.background})` }"
-        ></div>
-
         <!-- 鱼类卡片 -->
         <img
           :src="selectedWaterBody.fishImage"
@@ -47,22 +41,116 @@ import { ref, computed } from 'vue'
 const waterBodies = [
   {
     name: '克马玲诺也湖',
-    background: '/path/to/background1.jpg',
-    fishImage: '/path/to/fishCards.png', // 合并后的鱼类卡片图片路径
+    fishImage: '/path/to/fishCards_kema.png', // 合并后的鱼类卡片图片路径
     fishes: [
-      {
-        id: '7636',
-        name: '银鲫',
-        image: '/path/to/fish1.jpg',
-        location: '克马玲诺也湖',
-        quantity: 3,
-        weight: 180,
-        price: 3.11
-      },
-      // 其他鱼类...
+      // 相应鱼类信息...
     ]
   },
-  // 其他水塘...
+  {
+    name: '惟有诺克河',
+    fishImage: '/path/to/fishCards_weinuo.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '旧奥斯特罗格湖',
+    fishImage: '/path/to/fishCards_jiuostero.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '白河',
+    fishImage: '/path/to/fishCards_baihe.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '廓里湖',
+    fishImage: '/path/to/fishCards_kuoli.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '沃尔霍夫河',
+    fishImage: '/path/to/fishCards_wolhe.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '北顿涅茨河',
+    fishImage: '/path/to/fishCards_beidunnei.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '苏拉河',
+    fishImage: '/path/to/fishCards_sula.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '拉多加湖',
+    fishImage: '/path/to/fishCards_ladongjia.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '琥珀湖',
+    fishImage: '/path/to/fishCards_hupo.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '拉多加湖群岛',
+    fishImage: '/path/to/fishCards_ladongjiadao.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '阿赫图巴河',
+    fishImage: '/path/to/fishCards_achtuba.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '钢湖',
+    fishImage: '/path/to/fishCards_ganghu.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '下通古斯卡河',
+    fishImage: '/path/to/fishCards_xiatongguska.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '亚马河',
+    fishImage: '/path/to/fishCards_yama.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  },
+  {
+    name: '鄂威海',
+    fishImage: '/path/to/fishCards_ewei.png', // 合并后的鱼类卡片图片路径
+    fishes: [
+      // 相应鱼类信息...
+    ]
+  }
 ]
 
 const activeWaterBodyIndex = ref(0)
