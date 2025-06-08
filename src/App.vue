@@ -31,25 +31,11 @@
         ></div>
 
         <!-- 鱼类卡片 -->
-        <div class="grid grid-cols-3 gap-4 mt-10">
-          <div v-for="(fish, index) in selectedWaterBody.fishes" :key="index" class="bg-gray-800 rounded-lg p-4 relative">
-            <img :src="fish.image" alt="鱼" class="w-full h-20 object-cover mb-2">
-            <div class="flex justify-between items-center">
-              <div>
-                <h3 class="text-white">{{ fish.name }}</h3>
-                <p class="text-sm text-gray-400">{{ fish.location }}</p>
-              </div>
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
-                {{ fish.id }}
-              </div>
-            </div>
-            <div class="mt-2 border-t border-gray-600 pt-2">
-              <p class="text-sm text-gray-400">数量 {{ fish.quantity }} 个</p>
-              <p class="text-sm text-gray-400">质量 {{ fish.weight }} 克以上</p>
-              <p class="text-sm text-gray-400 mt-2"><span class="mr-1">¥</span>{{ fish.price }}</p>
-            </div>
-          </div>
-        </div>
+        <img
+          :src="selectedWaterBody.fishImage"
+          alt="鱼类卡片"
+          class="w-full h-full object-contain mt-10"
+        />
       </main>
     </div>
   </div>
@@ -62,6 +48,7 @@ const waterBodies = [
   {
     name: '克马玲诺也湖',
     background: '/path/to/background1.jpg',
+    fishImage: '/path/to/fishCards.png', // 合并后的鱼类卡片图片路径
     fishes: [
       {
         id: '7636',
@@ -108,44 +95,9 @@ main {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-main .grid {
-  margin-top: 5rem;
-}
-
-main .grid div {
-  position: relative;
-  overflow: hidden;
-}
-
-main .grid div::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-main .grid div img {
-  z-index: 2;
-  position: relative;
-}
-
-main .grid div .bg-blue-500 {
-  z-index: 3;
-  position: relative;
-}
-
-main .grid div .text-white {
-  z-index: 3;
-  position: relative;
-}
-
-main .grid div .text-sm {
-  z-index: 3;
-  position: relative;
+main img {
+  display: block;
+  margin: auto;
 }
 
 /* 动画 */
