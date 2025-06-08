@@ -24,7 +24,7 @@
       <!-- 右侧内容区域 -->
       <main class="content">
         <img
-          :src="`/src/assets/${currentImage}`"
+          :src="getImageUrl(currentImage)"
           alt="背景图"
           class="bg-image"
         />
@@ -33,8 +33,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
+
+// 图片路径生成函数（兼容 Vite 打包）
+function getImageUrl(name: string): string {
+  return new URL(`./assets/${name}`, import.meta.url).href
+}
 
 const menus = [
   { name: '克马尔蒂诺比湖', image: 'bg1.jpg' },
@@ -53,7 +58,7 @@ const menus = [
   { name: '娜威湾', image: 'bg14.jpg' }
 ]
 
-const currentImage = ref(menus[0].image)
+const currentImage = ref<string>(menus[0].image)
 </script>
 
 <style scoped>
