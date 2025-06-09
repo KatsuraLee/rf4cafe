@@ -160,17 +160,21 @@ onMounted(() => {
   display: flex;
   flex: 1;
   overflow: hidden;
+  background-image: url('/cafe/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .sidebar {
-  width: 220px;
-  background-color: rgba(0, 0, 0, 0.95);
-  padding: 25px 10px;
+  width: 280px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 25px 20px 0 80px;
   overflow-y: auto;
-  margin-left: 80px;
 }
 
 .sidebar-inner {
+  padding: 20px;
   height: calc(100% - 50px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -228,7 +232,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.7);
   position: relative;
 }
 
