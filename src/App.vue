@@ -48,6 +48,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+// 背景图片列表
+const bgImages = Array.from({ length: 18 }, (_, i) => `/bg/bg${i + 1}.jpg`)
+const randomBgImage = ref(`url(${bgImages[Math.floor(Math.random() * bgImages.length)]})`)
+
+// 随机更换背景图片
+function updateRandomBackground() {
+  const newIndex = Math.floor(Math.random() * bgImages.length)
+  randomBgImage.value = `url(${bgImages[newIndex]})`
+}
+
 // 自动生成图片映射表
 const imageMap = Object.fromEntries(
   [
@@ -126,6 +136,10 @@ function startAutoRefresh() {
 onMounted(() => {
   loading.value = false
   startAutoRefresh()
+  // 立即设置一个随机背景
+  updateRandomBackground()
+  // 每5分钟更换一次背景图片
+  setInterval(updateRandomBackground, 5 * 60 * 1000)
 })
 </script>
 
@@ -147,12 +161,12 @@ onMounted(() => {
 }
 
 .title {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 4px;
 }
 
@@ -160,14 +174,14 @@ onMounted(() => {
   display: flex;
   flex: 1;
   overflow: hidden;
-  background-image: url('/cafe/bg.jpg');
+  background-image: v-bind(randomBgImage);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .sidebar {
-  width: 280px;
+  width: 300px;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 25px 20px 0 80px;
   overflow-y: auto;
@@ -197,10 +211,10 @@ onMounted(() => {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 17px;
   color: #999;
   padding-left: 10px;
-  line-height: 24px;
+  line-height: 26px;
 }
 
 .sidebar-item:hover {
