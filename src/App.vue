@@ -112,13 +112,19 @@ const currentImage = ref<string>(menus[15].image)
 const currentUpdateTime = ref<string>('')
 const loading = ref<boolean>(true)
 
+// 定义 Screenshot 接口
+interface Screenshot {
+  image_number: number;
+  datetime: string;
+}
+
 // 加载更新时间数据
 async function loadUpdateTime() {
   try {
     const response = await fetch('/src/assets/time/update_time.json')
     const data = await response.json()
     const currentImageNumber = parseInt(currentImage.value.replace('.png', ''))
-    const screenshot = data.screenshots.find(s => s.image_number === currentImageNumber)
+    const screenshot = data.screenshots.find((s: Screenshot) => s.image_number === currentImageNumber)
     if (screenshot) {
       const date = new Date(screenshot.datetime)
       currentUpdateTime.value = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
