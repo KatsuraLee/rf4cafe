@@ -118,10 +118,13 @@ interface Screenshot {
   datetime: string;
 }
 
+// 获取 update_time.json 的 URL
+const updateTimeUrl = new URL('./assets/time/update_time.json', import.meta.url).href
+
 // 加载更新时间数据
 async function loadUpdateTime() {
   try {
-    const response = await fetch('/src/assets/time/update_time.json')
+    const response = await fetch(updateTimeUrl)
     const data = await response.json()
     const currentImageNumber = parseInt(currentImage.value.replace('.png', ''))
     const screenshot = data.screenshots.find((s: Screenshot) => s.image_number === currentImageNumber)
