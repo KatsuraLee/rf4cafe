@@ -3,7 +3,10 @@
     <!-- 顶部标题 -->
     <header class="app-header">
       <div class="title">咖啡厅</div>
-      <div class="subtitle">订单</div>
+      <div class="header-bottom">
+        <div class="subtitle">订单</div>
+        <div class="update-time" v-if="currentUpdateTime">更新时间: {{ currentUpdateTime }}</div>
+      </div>
     </header>
 
     <!-- 主体内容 -->
@@ -104,13 +107,32 @@ const menus = [
   { name: '挪威海', image: '16.png' }
 ]
 
-const currentImage = ref<string>(menus[0].image)
-const loading = ref<boolean>(true) // 默认为 true，首次加载显示 loading
+// 默认选择"挪威海"（索引为15）
+const currentImage = ref<string>(menus[15].image)
+const currentUpdateTime = ref<string>('')
+const loading = ref<boolean>(true)
+
+// 加载更新时间数据
+async function loadUpdateTime() {
+  try {
+    const response = await fetch('/src/assets/time/update_time.json')
+    const data = await response.json()
+    const currentImageNumber = parseInt(currentImage.value.replace('.png', ''))
+    const screenshot = data.screenshots.find(s => s.image_number === currentImageNumber)
+    if (screenshot) {
+      const date = new Date(screenshot.datetime)
+      currentUpdateTime.value = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    }
+  } catch (error) {
+    console.error('Failed to load update time:', error)
+  }
+} // 默认为 true，首次加载显示 loading
 
 // 点击左侧菜单时触发
 function handleMenuClick(imageName: string) {
   currentImage.value = imageName
   loading.value = true
+  loadUpdateTime() // 加载对应的更新时间
 }
 
 // 图片加载完成后触发
@@ -118,7 +140,7 @@ function onImageLoad() {
   loading.value = false
 }
 
-// 👇 每分钟刷新一次图片
+// 👇 每分钟刷新一次图片和更新时间
 function startAutoRefresh() {
   setInterval(() => {
     const prevImage = currentImage.value
@@ -128,18 +150,32 @@ function startAutoRefresh() {
     currentImage.value = '' as any // 清空一下保证下次赋值会触发更新
     setTimeout(() => {
       currentImage.value = prevImage
+      loadUpdateTime() // 更新时间显示
     }, 0)
   }, 60 * 1000) // 每 60 秒刷新一次
+}
+
+// 确保选中的菜单项在视图中可见
+function scrollToActiveMenuItem() {
+  setTimeout(() => {
+    const activeItem = document.querySelector('.sidebar-item.active')
+    if (activeItem) {
+      activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, 100)
 }
 
 // 页面加载完成后启动定时器
 onMounted(() => {
   loading.value = false
+  loadUpdateTime() // 加载初始更新时间
   startAutoRefresh()
   // 立即设置一个随机背景
   updateRandomBackground()
   // 每5分钟更换一次背景图片
   setInterval(updateRandomBackground, 5 * 60 * 1000)
+  // 确保"挪威海"菜单项在视图中可见
+  scrollToActiveMenuItem()
 })
 </script>
 
@@ -154,10 +190,16 @@ onMounted(() => {
 }
 
 .app-header {
-  background: #ccc;
+  background: #999;
   color: #000;
   text-align: center;
   padding: 12px 0 6px;
+}
+
+.header-bottom {
+  position: relative;
+  text-align: center;
+  padding: 20px 0 8px;
 }
 
 .title {
@@ -167,7 +209,35 @@ onMounted(() => {
 
 .subtitle {
   font-size: 16px;
-  margin-top: 4px;
+  color: #FFF;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.update-time {
+  position: absolute;
+  left: 50%;
+  margin-left: 40px; /* 距离订单文字10px */
+  top: 60%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%; /* 比文字宽一点 */
+  height: 4px;
+  background-color: #b7c639; /* 绿色 */
+  border-radius: 2px;
 }
 
 .app-main {
@@ -195,7 +265,7 @@ onMounted(() => {
 
 .sidebar-title {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 22px;
   margin-bottom: 16px;
   border-bottom: 2px solid #999999;
   line-height: 40px;
