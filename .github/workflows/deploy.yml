@@ -31,5 +31,5 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: "dist/**"
-          target: "/var/www/html"
+          source: "dist/**"       # dist目录下的所有内容（文件和文件夹）
+          target: "/var/www/html" # 服务器根目录，直接放内容
