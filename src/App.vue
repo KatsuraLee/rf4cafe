@@ -79,7 +79,8 @@ const imageMap = Object.fromEntries(
     '13.png',
     '14.png',
     '15.png',
-    '16.png'
+    '16.png',
+    '17.png'
   ].map(name => [name, new URL(`./assets/cafe/${name}`, import.meta.url).href])
 )
 
@@ -90,21 +91,22 @@ function getImageUrl(name: string): string {
 
 const menus = [
   { name: '克马羚诺也湖', image: '1.png' },
-  { name: '惟有诺克河', image: '2.png' },
-  { name: '旧奥斯特罗格湖', image: '3.png' },
-  { name: '白河', image: '4.png' },
-  { name: '廓里湖', image: '5.png' },
-  { name: '沃尔霍夫河', image: '6.png' },
-  { name: '北顿涅茨河', image: '7.png' },
-  { name: '苏拉河', image: '8.png' },
-  { name: '拉多加湖', image: '9.png' },
-  { name: '琥珀湖', image: '10.png' },
-  { name: '拉多加湖群岛', image: '11.png' },
-  { name: '阿赫图巴河', image: '12.png' },
-  { name: '铜湖', image: '13.png' },
-  { name: '下通古斯卡河', image: '14.png' },
-  { name: '亚马河', image: '15.png' },
-  { name: '挪威海', image: '16.png' }
+  { name: '埃尔克湖', image: '2.png' },
+  { name: '惟有诺克河', image: "3.png" },
+  { name: '旧奥斯特罗格湖', image: '4.png' },
+  { name: '白河', image: '5.png' },
+  { name: '廓里湖', image: '6.png' },
+  { name: '沃尔霍夫河', image: '7.png' },
+  { name: '北顿涅茨河', image: '8.png' },
+  { name: '苏拉河', image: '9.png' },
+  { name: '拉多加湖', image: '10.png' },
+  { name: '琥珀湖', image: '11.png' },
+  { name: '拉多加湖群岛', image: '12.png' },
+  { name: '阿赫图巴河', image: '13.png' },
+  { name: '铜湖', image: '14.png' },
+  { name: '下通古斯卡河', image: '15.png' },
+  { name: '亚马河', image: '16.png' },
+  { name: '挪威海', image: '17.png' }
 ]
 
 // 默认选择"挪威海"（索引为15）
