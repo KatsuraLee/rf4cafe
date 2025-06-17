@@ -109,8 +109,8 @@ const menus = [
   { name: '挪威海', image: '17.png' }
 ]
 
-// 默认选择"挪威海"（索引为15）
-const currentImage = ref<string>(menus[15].image)
+// 默认选择"挪威海"（索引为16）
+const currentImage = ref<string>(menus[16].image)
 const currentUpdateTime = ref<string>('')
 const loading = ref<boolean>(true)
 
