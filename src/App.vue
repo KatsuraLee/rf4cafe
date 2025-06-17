@@ -151,7 +151,8 @@ function onImageLoad() {
   loading.value = false
 }
 
-// 👇 每分钟刷新一次图片和更新时间
+// 👇 每分钟刷新一次图片和更新时间（已注释）
+/*
 function startAutoRefresh() {
   setInterval(() => {
     const prevImage = currentImage.value
@@ -165,6 +166,7 @@ function startAutoRefresh() {
     }, 0)
   }, 60 * 1000) // 每 60 秒刷新一次
 }
+*/
 
 // 确保选中的菜单项在视图中可见
 function scrollToActiveMenuItem() {
@@ -180,7 +182,7 @@ function scrollToActiveMenuItem() {
 onMounted(() => {
   loading.value = false
   loadUpdateTime() // 加载初始更新时间
-  startAutoRefresh()
+  // startAutoRefresh() // 已注释：禁用每分钟自动刷新
   // 立即设置一个随机背景
   updateRandomBackground()
   // 每5分钟更换一次背景图片
