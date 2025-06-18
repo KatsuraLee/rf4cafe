@@ -11,6 +11,15 @@
 
     <!-- 主体内容 -->
     <div class="app-main">
+
+        <!-- 背景图片 -->
+        <img
+          :src="randomBgImage"
+          alt="背景图片"
+          class="background-image"
+          @load="$event.target?.classList.add('loaded')"
+        />
+
       <!-- 左侧菜单 -->
       <aside class="sidebar">
         <div class="sidebar-inner">
@@ -35,12 +44,13 @@
         <!-- 圆形 Loading 动画 -->
         <div v-if="loading" class="loading-spinner"></div>
 
-        <!-- 图片容器 -->
+        
+        <!-- 内容图片 -->
         <img
           v-show="!loading"
           :src="getImageUrl(currentImage)"
-          alt="背景图"
-          class="bg-image"
+          alt="内容图"
+          class="content-image"
           @load="onImageLoad"
         />
       </main>
@@ -72,12 +82,12 @@ const bgImages = [
   'https://i0.hdslb.com/bfs/openplatform/759e4e0ab8a7a7c92b898594d2efb64fa6df699a.jpg',
   'https://i0.hdslb.com/bfs/openplatform/83960f535e92fae263d277d9cd0b0058eb585ec5.jpg'
 ]
-const randomBgImage = ref(`url(${bgImages[Math.floor(Math.random() * bgImages.length)]})`)
+const randomBgImage = ref(bgImages[Math.floor(Math.random() * bgImages.length)])
 
 // 随机更换背景图片
 function updateRandomBackground() {
   const newIndex = Math.floor(Math.random() * bgImages.length)
-  randomBgImage.value = `url(${bgImages[newIndex]})`
+  randomBgImage.value = bgImages[newIndex]
 }
 
 // 自动生成图片映射表
@@ -276,10 +286,7 @@ onMounted(() => {
   display: flex;
   flex: 1;
   overflow: hidden;
-  background-image: v-bind(randomBgImage);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: relative;
 }
 
 .sidebar {
@@ -287,6 +294,7 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 25px 20px 0 80px;
   overflow-y: auto;
+  z-index: 1;
 }
 
 .sidebar-inner {
@@ -352,10 +360,33 @@ onMounted(() => {
   position: relative;
 }
 
-.bg-image {
+.app-main {
+  position: relative;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1; /* 默认显示 */
+  transition: opacity 0.5s ease;
+}
+
+/* 保留loaded类以备后续使用 */
+.background-image.loaded {
+  opacity: 1;
+}
+
+.content-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  position: relative;
+  z-index: 1;
 }
 
 /* 圆形 Loading 样式 */
