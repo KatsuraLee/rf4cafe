@@ -17,7 +17,7 @@
           :src="randomBgImage"
           alt="背景图片"
           class="background-image"
-          @load="$event.target?.classList.add('loaded')"
+          @load="($event.target as HTMLImageElement)?.classList.add('loaded')"
         />
 
       <!-- 左侧菜单 -->
