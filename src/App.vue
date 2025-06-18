@@ -51,8 +51,27 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-// 背景图片列表
-const bgImages = Array.from({ length: 18 }, (_, i) => `/bg/bg${i + 1}.jpg`)
+// 远程背景图片列表（请替换为实际的远程图片URL）
+const bgImages = [
+  'https://i0.hdslb.com/bfs/openplatform/b5385b958b56064d4bb8b209f287660377977b5d.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/796eaedfb76adebf7e636bf94f1d56c72bd00485.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/d586df6fa0b5e4d63107e3426c5b98a79e559a82.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/57a38514cc74e302c7065ce889aedd720e64262e.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/3daecab91502febb8d1be96f75f93858fc5a0480.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/e699818defa384466302a693ea893228f47899d9.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/5a822a625ee9810005e7c487278ec69bb11b406d.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/8ccb16ebd7fff1c7bbe33e9a74b3219e5951594e.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/b4031207fe2465d8f5dd3e731e8f88b4194db0c6.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/e3f68e1a87a89105a92786f99a6a70f865ea1a46.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/598a06358124639c380a30b913bdd02aec42372d.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/47ee1939bb5222da000306cbbdf7f692cd0b9389.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/af088add52f288c89ec6b5b633440043ac7f5ca0.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/00ee1ab0f7967231529088414d64192bd68f91c4.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/6cc31c92bae59e66250fdf3f9227671dc214d65e.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/a788024c153b82e3352964538c52703f45115e8e.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/759e4e0ab8a7a7c92b898594d2efb64fa6df699a.jpg',
+  'https://i0.hdslb.com/bfs/openplatform/83960f535e92fae263d277d9cd0b0058eb585ec5.jpg'
+]
 const randomBgImage = ref(`url(${bgImages[Math.floor(Math.random() * bgImages.length)]})`)
 
 // 随机更换背景图片
